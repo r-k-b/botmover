@@ -1,0 +1,33 @@
+{
+  "name": "botmover",
+  "version": "1.0.0",
+  "description": "## setup",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": ">=8.6.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/r-k-b/botmover.git"
+  },
+  "author": "Robert K. Bell <robert.k.bell@gmail.com>",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/r-k-b/botmover/issues"
+  },
+  "homepage": "https://github.com/r-k-b/botmover#readme",
+  "dependencies": {
+    "chokidar-cli": "^1.2.0",
+    "prettier": "^1.7.3",
+    "tape": "^4.8.0"
+  },
+  "prettier": {
+    "bracketSpacing": false,
+    "singleQuote": true,
+    "semi": false,
+    "trailingComma": "all"
+  }
+}
