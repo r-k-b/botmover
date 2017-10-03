@@ -4,7 +4,9 @@
   "description": "## setup",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node tests/index.js",
+    "insert-blank-lines": "yes \"\" | head -50",
+    "watch-tests": "npm test; chokidar './*.js' 'lib/**/*.js' 'tests/**/*.js' -c 'npm run insert-blank-lines; npm test'"
   },
   "engines": {
     "node": ">=8.6.0"
@@ -20,9 +22,10 @@
   },
   "homepage": "https://github.com/r-k-b/botmover#readme",
   "dependencies": {
-    "chokidar-cli": "^1.2.0",
-    "prettier": "^1.7.3",
-    "tape": "^4.8.0"
+    "chokidar-cli": "1.2.0",
+    "inquirer": "3.3.0",
+    "prettier": "1.7.3",
+    "tape": "4.8.0"
   },
   "prettier": {
     "bracketSpacing": false,
