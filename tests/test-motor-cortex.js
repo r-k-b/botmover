@@ -7,6 +7,7 @@ const {
   defaultSquare,
   isAPoint,
   isASquare,
+  receiveCommand,
 } = require('../lib/motor-cortex')
 
 tape.test('is a point', t => {
@@ -44,5 +45,40 @@ tape.test('plws', t => {
   t.equal(plws(square, {x: 6, y: 3}), false)
   t.equal(plws(square, {x: -1, y: 3}), false)
   t.equal(plws(square, {x: 3, y: -1}), false)
+  t.end()
+})
+
+tape.test('place function', t => {
+  const square = defaultSquare
+  const targetPoint = {
+    x: 0,
+    y: 0,
+    orientation: 'n',
+  }
+  const command = {
+    type: 'PLACE',
+    placeAt: targetPoint,
+  }
+
+  t.deepEqual(receiveCommand(defaultSquare, undefined, command), {
+    square: defaultSquare,
+    point: targetPoint,
+  })
+
+  const oobTarget = {
+    x: -3,
+    y: 4,
+    orientation: 'n',
+  }
+  const badCommand = {
+    type: 'PLACE',
+    placeAt: oobTarget,
+  }
+
+  t.deepEqual(receiveCommand(defaultSquare, undefined, badCommand), {
+    square: defaultSquare,
+    point: undefined,
+  })
+
   t.end()
 })
