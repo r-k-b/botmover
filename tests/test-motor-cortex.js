@@ -9,6 +9,7 @@ const {
   isASquare,
   receiveCommand,
 } = require('../lib/motor-cortex')
+const {parseCommand} = require('../lib/input')
 
 tape.test('is a point', t => {
   t.equal(isAPoint({x: 1, y: 1}), true)
@@ -76,3 +77,34 @@ tape.test('place function', t => {
 
   t.end()
 })
+
+tape.test('example command sequences', t => {
+  // A
+  t.deepEqual(
+    executeCommands(
+      defaultSquare,
+      ['PLACE 0,0,NORTH', 'MOVE', 'REPORT'],
+      undefined,
+    ),
+    {x: 0, y: 1, orientation: 'N'},
+  )
+
+  // B
+  t.deepEqual(
+    executeCommands(
+      defaultSquare,
+      ['PLACE 1,2,EAST', 'MOVE', 'MOVE', 'LEFT', 'MOVE', 'REPORT'],
+      undefined,
+    ),
+    {x: 3, y: 3, orientation: 'N'},
+  )
+
+  t.end()
+})
+
+function executeCommands(table, commands, initialPosition) {
+  return commands.reduce(
+    (botPosition, cmd) => receiveCommand(table, botPosition, parseCommand(cmd)),
+    initialPosition,
+  )
+}
