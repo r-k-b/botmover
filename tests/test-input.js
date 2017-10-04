@@ -2,7 +2,12 @@
 
 const tape = require('tape')
 
-const {validateCommand, normaliseInput, inputErrors} = require('../lib/input')
+const {
+  validateCommand,
+  normaliseInput,
+  inputErrors,
+  parseCommand,
+} = require('../lib/input')
 
 tape.test('normaliser', t => {
   const ni = normaliseInput
@@ -33,3 +38,12 @@ tape.test('commands', t => {
 
   t.end()
 })
+
+tape.test('command parser', t => {
+  t.deepEqual(parseCommand('move'), {type: 'MOVE'})
+  t.throws(() => parseCommand('foo'))
+
+  t.end()
+})
+
+// selleys all-clear

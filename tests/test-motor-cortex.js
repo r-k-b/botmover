@@ -53,32 +53,26 @@ tape.test('place function', t => {
   const targetPoint = {
     x: 0,
     y: 0,
-    orientation: 'n',
+    orientation: 'N',
   }
   const command = {
     type: 'PLACE',
     placeAt: targetPoint,
   }
 
-  t.deepEqual(receiveCommand(defaultSquare, undefined, command), {
-    square: defaultSquare,
-    point: targetPoint,
-  })
+  t.deepEqual(receiveCommand(defaultSquare, undefined, command), targetPoint)
 
   const oobTarget = {
     x: -3,
     y: 4,
-    orientation: 'n',
+    orientation: 'N',
   }
   const badCommand = {
     type: 'PLACE',
     placeAt: oobTarget,
   }
 
-  t.deepEqual(receiveCommand(defaultSquare, undefined, badCommand), {
-    square: defaultSquare,
-    point: undefined,
-  })
+  t.deepEqual(receiveCommand(defaultSquare, undefined, badCommand), undefined)
 
   t.end()
 })
