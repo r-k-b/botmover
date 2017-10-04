@@ -87,9 +87,21 @@ tape.test('example command sequences', t => {
       undefined,
     ),
     {x: 0, y: 1, orientation: 'N'},
+    'example A',
   )
 
   // B
+  t.deepEqual(
+    executeCommands(
+      defaultSquare,
+      ['PLACE 0,0,NORTH', 'LEFT', 'REPORT'],
+      undefined,
+    ),
+    {x: 0, y: 0, orientation: 'W'},
+    'example B',
+  )
+
+  // C
   t.deepEqual(
     executeCommands(
       defaultSquare,
@@ -97,7 +109,16 @@ tape.test('example command sequences', t => {
       undefined,
     ),
     {x: 3, y: 3, orientation: 'N'},
+    'example C',
   )
+
+  t.throws(() => {
+    executeCommands(
+      defaultSquare,
+      ['PLACE 1,2', 'MOVE', 'MOVE', 'LEFT', 'MOVE', 'REPORT'],
+      undefined,
+    )
+  })
 
   t.end()
 })
